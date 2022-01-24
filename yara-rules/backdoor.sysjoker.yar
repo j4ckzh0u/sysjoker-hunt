@@ -61,3 +61,69 @@ rule Sysjoker_Backdoor_Linux : Backdoor {
   condition:
     filesize < 2MB and uint32be(0) == 0x7F454C46 and all of ($s*)
 }
+
+rule Sysjoker_Backdoor_Macos_generator : Backerdoor {
+  meta:
+    	author = "jackzhou"
+      date = "2022-01-24"
+      description = "hunt sysjoker"
+      hash0 = "e06e06752509f9cd8bc85aa1aa24dba2"
+      sample_filetype = "exe"
+      yaragenerator = "https://github.com/Xen0ph0n/YaraGenerator"
+  strings:
+    	$string0 = "@_curl_easy_getinfo"
+      $string1 = "__Znwm"
+      $string2 = "__ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE"
+      $string3 = "0004 (EOT) must be escaped to \\u0004"
+      $string4 = " value_t::array "
+      $string5 = "' after '/'"
+      $string6 = "0010 (DLE) must be escaped to \\u0010"
+      $string7 = "001A (SUB) must be escaped to \\u001A"
+      $string9 = "/Users/"
+      $string10 = "___cxa_end_catch"
+      $string11 = "<plist version"
+      $string12 = "___stack_chk_guard"
+      $string14 = "iterator does not fit current value"
+      $string15 = "_system"
+      $string16 = "chmod 0777 '"
+      $string17 = "___cxa_allocate_exception"
+      $string18 = "@__ZNSt3__113basic_ostreamIcNS_11char_traitsIcEEElsEi"
+  condition:
+      all of them
+}
+
+rule mal_sysjoker_macOS {
+    meta:
+        description = "Identify string artifacts from the SysJoker macOS backdoor."
+        author = "@shellcromancer <root@shellcromancer.io>"
+        version = "0.1"
+        date = "2022-01-13"
+        reference = "https://www.intezer.com/blog/malware-analysis/new-backdoor-sysjoker/"
+        reference = "https://objective-see.com/blog/blog_0x6C.html"
+        sha256 = "1a9a5c797777f37463b44de2b49a7f95abca786db3977dcdac0f79da739c08ac"
+    strings:
+        $s1 = "1W64PQQxrwY3XjBnv_QAeBQu-ePr537eu" // Google Sheets ID
+        $s2 = "welcome to extenal app"
+        $s3 = "updateMacOs"
+        $s4 = "/Users/mac/Desktop/test/test/json.hpp"
+    condition:
+        (uint32(0) == 0xfeedface or uint32(0) == 0xcefaedfe or uint32(0) == 0xfeedfacf or uint32(0) == 0xcffaedfe or uint32(0) == 0xcafebabe or uint32(0) == 0xbebafeca)
+        and any of them
+}
+
+rule mal_sysjoker_macOS_cmds {
+    meta:
+        description = "Identify shell commands in the SysJoker macOS backdoor."
+        author = "@shellcromancer <root@shellcromancer.io>"
+        version = "0.1"
+        date = "2022-01-13"
+        reference = "https://www.intezer.com/blog/malware-analysis/new-backdoor-sysjoker/"
+        reference = "https://objective-see.com/blog/blog_0x6C.html"
+        sha256 = "1a9a5c797777f37463b44de2b49a7f95abca786db3977dcdac0f79da739c08ac"
+    strings:
+        $s1 = ">/dev/null 2>&1 &"
+        $s2 = "chmod 0777"
+        $s3 = "unzip -o"
+        $s4 = "whoami"
+    condition:
+        all of them
