@@ -127,3 +127,21 @@ rule mal_sysjoker_macOS_cmds {
         $s4 = "whoami"
     condition:
         all of them
+
+
+rule sysjoker_Linux_cmds_hunt {
+    meta:
+        description = "Identify shell commands in the SysJoker Linux backdoor."
+        author = "jackzhou"
+        version = "0.1"
+        date = "2022-01-24"
+        hash = "5e11432c30783b184dc2bf27aa1728b4"
+        reference = "https://objective-see.com/blog/blog_0x6C.html"
+        sha256 = "bd0141e88a0d56b508bc52db4dab68a49b6027a486e4d9514ec0db006fe71eed"
+    strings:
+        $s1 = "@reboot"
+        $s2 = "/.Library/SystemServices/updateSystem"
+        $s3 = "crontab -l | egrep -v "
+        $s4 = "cut -c -80"
+    condition:
+        all of them
