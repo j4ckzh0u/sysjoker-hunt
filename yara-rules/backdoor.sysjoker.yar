@@ -1,4 +1,4 @@
-rule Sysjoker_Dropper_Win : Backdoor {
+rule RAT__Sysjoker_Dropper_Win : Backdoor {
   meta:
     author = "@_lubiedo"
     date   = "13-01-2022"
@@ -13,7 +13,7 @@ rule Sysjoker_Dropper_Win : Backdoor {
     filesize < 400KB and uint16be(0) == 0x4D5A and all of ($s*)
 }
 
-rule Sysjoker_Backdoor_Win : Backdoor {
+rule RAT__Sysjoker_Backdoor_Win : Backdoor {
   meta:
     author = "@_lubiedo"
     date   = "13-01-2022"
@@ -30,7 +30,7 @@ rule Sysjoker_Backdoor_Win : Backdoor {
     filesize < 500KB and uint16be(0) == 0x4D5A and all of ($s*)
 }
 
-rule Sysjoker_Backdoor_macOS : Backdoor {
+rule RAT__Sysjoker_Backdoor_macOS : Backdoor {
   meta:
     author = "@_lubiedo"
     date   = "13-01-2022"
@@ -46,7 +46,7 @@ rule Sysjoker_Backdoor_macOS : Backdoor {
     filesize < 500KB and uint32be(0) == 0xCAFEBABE and all of ($s*)
 }
 
-rule Sysjoker_Backdoor_Linux : Backdoor {
+rule RAT__Sysjoker_Backdoor_Linux : Backdoor {
   meta:
     author = "@_lubiedo"
     date   = "13-01-2022"
@@ -62,7 +62,7 @@ rule Sysjoker_Backdoor_Linux : Backdoor {
     filesize < 2MB and uint32be(0) == 0x7F454C46 and all of ($s*)
 }
 
-rule Sysjoker_Backdoor_Macos_generator : Backerdoor {
+rule RAT__Sysjoker_Backdoor_Macos_generator : Backerdoor {
   meta:
     	author = "jackzhou"
       date = "2022-01-24"
@@ -92,7 +92,7 @@ rule Sysjoker_Backdoor_Macos_generator : Backerdoor {
       all of them
 }
 
-rule mal_sysjoker_macOS {
+rule RAT__mal_sysjoker_macOS {
     meta:
         description = "Identify string artifacts from the SysJoker macOS backdoor."
         author = "@shellcromancer <root@shellcromancer.io>"
@@ -111,7 +111,7 @@ rule mal_sysjoker_macOS {
         and any of them
 }
 
-rule mal_sysjoker_macOS_cmds {
+rule RAT__mal_sysjoker_macOS_cmds {
     meta:
         description = "Identify shell commands in the SysJoker macOS backdoor."
         author = "@shellcromancer <root@shellcromancer.io>"
@@ -127,9 +127,9 @@ rule mal_sysjoker_macOS_cmds {
         $s4 = "whoami"
     condition:
         all of them
+}
 
-
-rule sysjoker_Linux_cmds_hunt {
+rule RAT__sysjoker_Linux_cmds_hunt {
     meta:
         description = "Identify shell commands in the SysJoker Linux backdoor."
         author = "jackzhou"
@@ -145,3 +145,4 @@ rule sysjoker_Linux_cmds_hunt {
         $s4 = "cut -c -80"
     condition:
         all of them
+}
