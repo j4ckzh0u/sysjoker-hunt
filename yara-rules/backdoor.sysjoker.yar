@@ -71,14 +71,9 @@ rule RAT__Sysjoker_Backdoor_Macos_generator : Backerdoor {
       sample_filetype = "exe"
       yaragenerator = "https://github.com/Xen0ph0n/YaraGenerator"
   strings:
-    	$string0 = "@_curl_easy_getinfo"
       $string1 = "__Znwm"
-      $string2 = "__ZTSNSt3__113basic_filebufIcNS_11char_traitsIcEEEE"
-      $string3 = "0004 (EOT) must be escaped to \\u0004"
       $string4 = " value_t::array "
       $string5 = "' after '/'"
-      $string6 = "0010 (DLE) must be escaped to \\u0010"
-      $string7 = "001A (SUB) must be escaped to \\u001A"
       $string9 = "/Users/"
       $string10 = "___cxa_end_catch"
       $string11 = "<plist version"
@@ -86,8 +81,6 @@ rule RAT__Sysjoker_Backdoor_Macos_generator : Backerdoor {
       $string14 = "iterator does not fit current value"
       $string15 = "_system"
       $string16 = "chmod 0777 '"
-      $string17 = "___cxa_allocate_exception"
-      $string18 = "@__ZNSt3__113basic_ostreamIcNS_11char_traitsIcEEElsEi"
   condition:
       all of them
 }
